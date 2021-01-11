@@ -1,0 +1,40 @@
+{
+  "@context": {
+    "bs": "https://bioschemas.org/",
+	"schema": "https://schema.org/",
+	"ns": "https://ammar257ammar.github.com/RDFied-datasets/ns:",
+	"citation": "schema:citation",
+	"contributor": "schema:contributor",
+	"name": "schema:name",
+	"url": "schema:name",
+	"variableMeasured": "schema:variableMeasured"
+  },
+  "@id": "ns:dataset_a89531aef1d8f1a3c13ac1baf35b4480",
+  "@type": "schema:Dataset",
+  "citation": "RDF version of the data from Choi, JS., Ha, M.K., Trinh, T.X. et al. Towards a generalized toxicity prediction model for oxide nanomaterials using integrated data from different sources. Sci Rep 8, 6110 (2018). https://doi.org/10.1038/s41598-018-24483-z",
+  "contributor": {
+    "@type": "schema:Person",
+    "name": "Ammar Ammar",
+    "url": "https://github.com/ammar257ammar"
+  },
+  "variableMeasured":[{
+    "@type": "schema:PropertyValue",
+    "name": "Size",
+    "unitText": "nm"
+  },
+  {
+    "@type": "schema:PropertyValue",
+    "name": "Specific surface area",
+    "unitText": "m2/g"
+  },
+  {
+    "@type": "schema:PropertyValue",
+    "name": "Zeta potential",
+    "unitText": "mV"
+  },
+  {
+    "@type": "schema:PropertyValue",
+    "name": "Shape",
+    "unitText": "nm"
+  }]
+}

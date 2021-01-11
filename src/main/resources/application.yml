@@ -1,0 +1,17 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /FairAssessor
+  
+spring:
+  main:
+    banner-mode: "off"
+  freemarker:
+    template-loader-path: classpath:/templates
+    suffix: .ftl
+    cache: false
+
+logging:
+  level:
+    org:
+      springframework: ERROR

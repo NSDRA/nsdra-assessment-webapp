@@ -1,0 +1,9 @@
+curl -H "Content-type: application/json" -d "{\"url\":\"http://127.0.0.1/fair/index.html\",\"pattern\":\"\",\"type\":\"static\"}" -X POST http://127.0.0.1:8086/FairAssessor/assess
+
+curl -H "Content-type: application/json" -d "{\"url\":\"http://127.0.0.1/fair/index.html\",\"pattern\":\"\",\"type\":\"dynamic\"}" -X POST http://127.0.0.1:8086/FairAssessor/assess
+
+
+curl -X GET  https://data.enanomapper.net/substance/FCSV-bc77c03d-4e75-3fab-bb3d-17b983663819/study?top=P-CHEM>substance-study-pchem.json
+
+//SPARQLResultsXMLWriter writer = new SPARQLResultsXMLWriter(System.out);
+//connection.prepareTupleQuery(query).evaluate(writer);
