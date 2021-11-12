@@ -1,0 +1,23 @@
+version: "3"
+   
+services:
+  nsdra-db:
+    image: mysql:8.0.26
+    container_name: nsdra-db
+    volumes:
+      - d:/nsdra-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - nsdra-network
+  nsdra-webapp:
+    image: aammar/nsdra-webapp:latest
+    container_name: nsdra-webapp
+    ports:
+      - "8080:8086"
+    networks:
+      - nsdra-network
+    depends_on:
+      - nsdra-db
+networks:
+  nsdra-network:

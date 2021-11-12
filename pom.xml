@@ -1,19 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>nl.unimaas.bigcat</groupId>
-	<artifactId>fair-assessment-webapp</artifactId>
+	<groupId>io.github.ammar257ammar.fair.nsdra</groupId>
+	<artifactId>nsdra-assessment-webapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
-	<name>FAIR NanoSafety FAIR Assessemnt Service</name>
-	<description>NanoSafety datasets FAIR Assessemnt Service using maturity indicators</description>
-	<url>http://fair-nanosafety.com</url>
+
+	<name>NSDRA: NanoSafety Dara Reusabilit Assessment Application</name>
+	<description>NanoSafety datasets FAIR reusability assessemnt service using maturity indicators</description>
+	<url>https://nsdra.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,27 +23,28 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
-	
+
 	<repositories>
 		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
 		</repository>
 	</repositories>
-	
+
 	<dependencies>
-	
+
 		<dependency>
-		    <groupId>com.github.ammar257ammar.BMUSE</groupId>
-		    <artifactId>core</artifactId>
-		    <!-- <version>v0.1.2</version> -->
-		    <!-- <version>da0316e</version> -->
-		    <version>a0e55c4</version>
-		</dependency>	
-	   	<dependency> 
-	       <groupId>org.springframework.boot</groupId>
-	       <artifactId>spring-boot-starter-freemarker</artifactId>
-	   	</dependency>        
+			<groupId>com.github.ammar257ammar.BMUSE</groupId>
+			<artifactId>core</artifactId>
+			<!-- <version>da0316e</version> -->
+			<!-- <version>22d4330</version> -->
+			<!-- <version>a0e55c4</version> -->
+			<version>42cb8a2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
@@ -52,9 +54,18 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-devtools</artifactId>
-		    <optional>true</optional>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.19</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -67,14 +78,23 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- <dependency> <groupId>com.io-informatics.oss</groupId> <artifactId>jackson-jsonld</artifactId> 
+			<version>0.1.1</version> </dependency> -->
 		<dependency>
-		    <groupId>com.io-informatics.oss</groupId>
-		    <artifactId>jackson-jsonld</artifactId>
-		    <version>0.1.1</version>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.jsonld-java/jsonld-java -->
+		<dependency>
+			<groupId>com.github.jsonld-java</groupId>
+			<artifactId>jsonld-java</artifactId>
+			<version>0.13.3</version>
+		</dependency>
+
 	</dependencies>
 
-	<build> 
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

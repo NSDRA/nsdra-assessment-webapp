@@ -1,16 +1,39 @@
 server:
   port: 8086
+  forward-headers-strategy: framework
   servlet:
-    context-path: /FairAssessor
-  
+    context-path: /
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+  http2:
+    enabled: true
 spring:
-  main:
-    banner-mode: "off"
-  freemarker:
-    template-loader-path: classpath:/templates
-    suffix: .ftl
-    cache: false
-
+    main:
+      banner-mode: off
+      logStartupInfo: false
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://nsdra-db/nsdra?requireSSL=false&allowPublicKeyRetrieval=true&useSSL=false
+        username: root
+        password: root
+    resources:
+      cache:
+        cachecontrol:
+          max-age: 7d
+          must-revalidate: true
+    jpa:
+        hibernate:
+          ddl-auto: none
+        generate-ddl: true
+        show-sql: true
+        properties:
+          hibernate:
+            dialect: org.hibernate.dialect.MySQL5Dialect
+    freemarker:
+        template-loader-path: classpath:/templates
+        suffix: .ftl
+        cache: false
 logging:
   level:
     org:
