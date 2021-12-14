@@ -27,7 +27,7 @@ RUN	apt-get update -y && \
 COPY	--from=maven target/nsdra-assessment-webapp-0.0.1-SNAPSHOT.jar /app/nsdra-webapp.jar
 
 RUN 	mkdir /etc/bmuse
-ENV 	CHROMEDRIVER_VERSION 93.0.4577.15
+ENV 	CHROMEDRIVER_VERSION 96.0.4664.45
 ENV 	CHROMEDRIVER_DIR /etc/bmuse/driver
 RUN 	mkdir $CHROMEDRIVER_DIR
 
