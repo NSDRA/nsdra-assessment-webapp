@@ -41,7 +41,7 @@
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-10 col-md-10 col-sm-12 p-0">
-                            <input id="url" name="url" type="text" value="http://127.0.0.1:8086/test.html" class="form-control search-slt" placeholder="Enter Dataset URL">
+                            <input id="url" name="url" type="text" value="https://nsdra.org/test.html" class="form-control search-slt" placeholder="Enter Dataset URL">
                         </div>
                         <div class="hidden col-lg-2 col-md-2 col-sm-12 p-0">
                             <select hidden="hidden" id="type" name="type" class="form-control search-slt" id="exampleFormControlSelect1">
