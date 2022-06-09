@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.rdf4j.repository.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,12 @@ import io.github.ammar257ammar.fair.nsdra.service.SubmissionService;
 public class MainController {
 
   @Autowired
+  @Qualifier("miJsonDescription")
   private JSONObject miJsonDescription;
+  
+  @Autowired
+  @Qualifier("miAppJsonDescription")
+  private JSONObject miAppJsonDescription;
   
   @Autowired
   private SubmissionService submissionService;
@@ -49,6 +55,7 @@ public class MainController {
 
     ModelAndView mv = new ModelAndView("index");
     mv.addObject("lists", miJsonDescription.toString());
+    mv.addObject("mapping", miAppJsonDescription.toString());
 
     return mv;
   }
@@ -102,7 +109,11 @@ public class MainController {
     try {
       repo = scraper.scrape(submission.getUrl(), submission.getType());
 
-      submission.setStatus("Assessed");
+      if(repo == null) {
+    	  submission.setStatus("Not Assessed");
+      }else {
+          submission.setStatus("Assessed");    	  
+      }
 
     } catch (Exception e) {
       submission.setStatus("Not Assessed");
@@ -111,7 +122,7 @@ public class MainController {
     if (submission.getStatus().equals("Assessed")) {
 
       List<MaturityIndicatorAssessmentDto> miReportedList = FairAssessor
-          .assessSubmission(repo, submission.getMiList());
+          .assessSubmission(repo, submission.getMiList(), miAppJsonDescription);
       submission.setMiList(miReportedList);
 
       SimpleDateFormat formatter = new SimpleDateFormat(

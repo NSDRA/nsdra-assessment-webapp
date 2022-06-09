@@ -25,13 +25,6 @@
 		<log4j2.version>2.16.0</log4j2.version>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-	</repositories>
-
 	<dependencies>
 
 		<dependency>
@@ -41,6 +34,13 @@
 			<!-- <version>22d4330</version> -->
 			<!-- <version>a0e55c4</version> -->
 			<version>42cb8a2</version>
+			<exclusions>
+				<!-- STAX comes with Java 1.6 -->
+				<exclusion>
+					<groupId>com.github.jsonld-java.jsonld-java</groupId>
+					<artifactId>jsonld-java</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -79,21 +79,31 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency> <groupId>com.io-informatics.oss</groupId> <artifactId>jackson-jsonld</artifactId> 
-			<version>0.1.1</version> </dependency> -->
+		<dependency>
+			<groupId>com.io-informatics.oss</groupId>
+			<artifactId>jackson-jsonld</artifactId>
+			<version>0.1.1</version>
+		</dependency>
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.github.jsonld-java/jsonld-java -->
 		<dependency>
-			<groupId>com.github.jsonld-java</groupId>
+			<groupId>com.github.jsonld-java.jsonld-java</groupId>
 			<artifactId>jsonld-java</artifactId>
-			<version>0.13.3</version>
+			<version>0.13.4</version>
+			<!-- <version>v0.13.4</version> -->
 		</dependency>
 
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>

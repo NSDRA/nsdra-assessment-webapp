@@ -16,11 +16,20 @@ import com.github.openjson.JSONObject;
 @SpringBootApplication
 public class App {
 
-  @Bean
+  @Bean(name="miJsonDescription")
   public JSONObject getMiJsonDescription()
       throws JSONException, MalformedURLException, IOException {
     JSONObject json = new JSONObject(IOUtils.toString(new URL(
         "https://raw.githubusercontent.com/NSDRA/nsdra-maturity-indicators/main/lists.json"),
+        Charset.forName("UTF-8")));
+    return json;
+  }
+  
+  @Bean(name="miAppJsonDescription")
+  public JSONObject getMiAppJsonDescription()
+      throws JSONException, MalformedURLException, IOException {
+    JSONObject json = new JSONObject(IOUtils.toString(new URL(
+        "https://raw.githubusercontent.com/NSDRA/nsdra-maturity-indicators/main/mapping.json"),
         Charset.forName("UTF-8")));
     return json;
   }

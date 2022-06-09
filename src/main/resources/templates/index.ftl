@@ -41,7 +41,7 @@
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-10 col-md-10 col-sm-12 p-0">
-                            <input id="url" name="url" type="text" value="https://nsdra.org/test.html" class="form-control search-slt" placeholder="Enter Dataset URL">
+                            <input id="url" name="url" type="text" value="https://nanocommons.github.io/datasets/overview/5743204.html" class="form-control search-slt" placeholder="Enter Dataset URL">
                         </div>
                         <div class="hidden col-lg-2 col-md-2 col-sm-12 p-0">
                             <select hidden="hidden" id="type" name="type" class="form-control search-slt" id="exampleFormControlSelect1">
@@ -76,7 +76,85 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 p-0">
 				<div id="accordion">
 					<#assign mi_lists = lists?eval>
-					
+					<#assign mi_app_mapping = mapping?eval>
+					<#assign css1 = "">
+					<#assign css2 = "">
+					<#assign css3 = "">
+					<#assign css4 = "">
+					<#assign css5 = "">
+
+					<div class="card">
+						<div class="card-header" id="headingOne">
+							<h5 class="mb-0">
+								<button id="acc-header-abstract" class="acc-header btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne-abstract" aria-expanded="false" aria-controls="collapseOne-abstract">
+									<span class="list-title float-left">${mi_app_mapping.title}</span> <span id="fetch-status-abstract" class="badge badge-info fetch-status float-right">abstract</span>
+								</button>
+							</h5>
+						</div>
+						<div id="collapseOne-abstract" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+							<div class="card-body">
+								<table id="mi-table-abstract" class="table table-striped">
+									<thead>
+										<th>Maturity Indicator ID</th>
+										<th>Maturity Indicator Title</th>
+										<th>GP</th>
+										<th>NI</th>
+										<th>TP</th>
+										<th>RR</th>
+										<th>NC</th>
+										<th><input type="checkbox" checked="checked" class="selectall" name="selectall" disabled></th>
+									</thead>
+									<tbody>
+										<#list mi_app_mapping["abstractMIs"] as mi>
+											<tr class="mi-item">
+												<td><a href="https://github.com/NSDRA/nsdra-maturity-indicators" target="_blank">${mi.mi_id}</a></td>
+												<td>${mi.name}</td>
+												<#list mi["related_applications"] as app>
+													<#if app.acronym == "GP">
+														<#assign css1 = "bg-warning">
+													</#if>
+													<#if app.acronym == "NI">
+														<#assign css2 = "bg-warning">
+													</#if>
+													<#if app.acronym == "TP">
+														<#assign css3 = "bg-warning">
+													</#if>
+													<#if app.acronym == "RR">
+														<#assign css4 = "bg-warning">
+													</#if>
+													<#if app.acronym == "NC">
+														<#assign css5 = "bg-warning">
+													</#if>
+												</#list>
+												<td class="${css1}"></td>
+												<td class="${css2}"></td>
+												<td class="${css3}"></td>
+												<td class="${css4}"></td>												
+												<td class="${css5}"></td>
+												<td>
+													<input type="hidden" name="mi-id" value="${mi.mi_id}" />
+													<input type="hidden" name="mi-title" value="${mi.name}" />
+													<input type="hidden" name="mi-url" value="https://github.com/NSDRA/nsdra-maturity-indicators/blob/main/abstract/README.md" />
+													<input type="hidden" name="mi-variable" value="${mi.mi_id}" />
+													<input type="hidden" name="mi-list-id" value="abstract" />
+													<input type="hidden" name="mi-list-title" value="${mi_app_mapping.title}" />
+													<input type="hidden" name="mi-list-ref-url" value="https://github.com/NSDRA/nsdra-maturity-indicators/blob/main/abstract/README.md" />
+													<input type="checkbox" name="results" checked="checked" disabled />
+												</td>
+											</tr>
+											
+											<#assign css1 = "">
+											<#assign css2 = "">
+											<#assign css3 = "">
+											<#assign css4 = "">
+											<#assign css5 = "">
+										</#list>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+										
 					<#list mi_lists.lists as mi_list>
 						<div class="card">
 							<div class="card-header" id="headingOne">

@@ -129,63 +129,166 @@ function renderResults(json)
 
         keys.forEach((key, index) => {
 
-            var miGroup = miGroups[key];
+            if(key == "abstract"){
 
-            var miRowsHtml="";
+                var miAbstractGroup = miGroups[key];
 
-            for(var j = 0; j < miGroup.length; j++){
+                var miAbstractRowsHtml="";
 
-                var miGroupItem = miGroup[j];
+                for(var j = 0; j < miAbstractGroup.length; j++){
 
-                var statuBadge = "";
+                    var miGroupItem = miAbstractGroup[j];
 
-                if(miGroupItem.status == "PASS"){
+                    var statuBadge = "";
+
+                    var css1 = "";
+                    var css2 = "";
+                    var css3 = "";
+                    var css4 = "";
+                    var css5 = "";
+
+                    var cssBadge = "danger";
+
+                    var miApps = miGroupItem.comment.split(";");
+
+                    if(miGroupItem.status == "PASS"){
                         statuBadge = '<span class="badge badge-success">'+miGroupItem.status+'</span>';
-                }else if(miGroupItem.status == "FAIL"){
+                        cssBadge = "success";
+                    }else if(miGroupItem.status == "FAIL"){
                         statuBadge = '<span class="badge badge-danger">'+miGroupItem.status+'</span>';
+                        cssBadge = "danger";
+                    }
+
+                    if(miApps.includes("GP")){
+                        css1 = "bg-"+cssBadge;
+                    }
+                    if(miApps.includes("NI")){
+                        css2 = "bg-"+cssBadge;
+                    }
+                    if(miApps.includes("TP")){
+                        css3 = "bg-"+cssBadge;
+                    }
+                    if(miApps.includes("RR")){
+                        css4 = "bg-"+cssBadge;
+                    }
+                    if(miApps.includes("NC")){
+                        css5 = "bg-"+cssBadge;
+                    }
+
+                    miAbstractRowsHtml += `
+                        <tr class="mi-item">
+                            <td><a href="`+miGroupItem.url+`" target="_blank">`+miGroupItem.miId+`</a></td>
+                            <td>`+miGroupItem.title+`</td>
+                            <td class="`+css1+`"></td>
+                            <td class="`+css2+`"></td>
+                            <td class="`+css3+`"></td>
+                            <td class="`+css4+`"></td>
+                            <td class="`+css5+`"></td>
+                            <td>`+statuBadge+`</td>
+                        </tr>
+                    `;
                 }
 
-                miRowsHtml += `
-                    <tr class="mi-item">
-                        <td><a href="`+miGroupItem.url+`" target="_blank">`+miGroupItem.miId+`</a></td>
-                        <td>`+miGroupItem.title+`</td>
-                        <td>`+miGroupItem.comment+`</td>
-                        <td>`+statuBadge+`</td>
-                    </tr>
-                `;
-            }
-
-            html += `
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <button id="acc-header-`+miGroup[0].listId+`" class="acc-header btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne-`+miGroup[0].listId+`" aria-expanded="false" aria-controls="collapseOne-`+miGroup[0].listId+`">
-                                <span class="list-title float-left">`+miGroup[0].listTitle+`</span> <span id="fetch-status-`+miGroup[0].listId+`" class="badge badge-info fetch-status float-right">`+miGroup[0].listId+`</span>
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapseOne-`+miGroup[0].listId+`" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body">
-                            <table id="mi-table-`+miGroup[0].listId+`" class="table table-striped">
-                                <thead>
-                                    <th>Maturity Indicator ID</th>
-                                    <th>Maturity Indicator Title</th>
-                                    <th>Comment</th>
-                                    <th>Status</th>
-                                </thead>
-                                <tbody>
-                                    `+miRowsHtml+`
-                                </tbody>
-                            </table>
+                html += `<div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button id="acc-header-`+miAbstractGroup[0].listId+`" class="acc-header btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne-`+miAbstractGroup[0].listId+`" aria-expanded="false" aria-controls="collapseOne-`+miAbstractGroup[0].listId+`">
+                                    <span class="list-title float-left">`+miAbstractGroup[0].listTitle+`</span> <span id="fetch-status-`+miAbstractGroup[0].listId+`" class="badge badge-info fetch-status float-right">`+miAbstractGroup[0].listId+`</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne-`+miAbstractGroup[0].listId+`" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                <div>
+                                    <strong>Applications acronyms:</strong>
+                                    <ul>
+                                        <li><strong>GP</strong>: Grouping/Read-across</li>
+                                        <li><strong>NI</strong>: Nanoform Identification</li>
+                                        <li><strong>TP</strong>: Toxicity Prediction</li>
+                                        <li><strong>RR</strong>: Regulatory requirements</li>
+                                        <li><strong>NC</strong>: NanoInChI Calculation</li>
+                                    </ul>
+                                </div>
+                                <table id="mi-table-`+miAbstractGroup[0].listId+`" class="table table-striped">
+                                    <thead>
+                                        <th>Maturity Indicator ID</th>
+                                        <th>Maturity Indicator Title</th>
+                                        <th>GP</th>
+                                        <th>NI</th>
+                                        <th>TP</th>
+                                        <th>RR</th>
+                                        <th>NC</th>
+                                        <th>Status</th>
+                                    </thead>
+                                    <tbody>
+                                        `+miAbstractRowsHtml+`
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
+                `;
+
+            }else{
+
+                var miGroup = miGroups[key];
+
+                var miRowsHtml="";
+
+                for(var j = 0; j < miGroup.length; j++){
+
+                    var miGroupItem = miGroup[j];
+
+                    var statuBadge = "";
+
+                    if(miGroupItem.status == "PASS"){
+                            statuBadge = '<span class="badge badge-success">'+miGroupItem.status+'</span>';
+                    }else if(miGroupItem.status == "FAIL"){
+                            statuBadge = '<span class="badge badge-danger">'+miGroupItem.status+'</span>';
+                    }
+
+                    miRowsHtml += `
+                        <tr class="mi-item">
+                            <td><a href="`+miGroupItem.url+`" target="_blank">`+miGroupItem.miId+`</a></td>
+                            <td>`+miGroupItem.title+`</td>
+                            <td>`+miGroupItem.comment+`</td>
+                            <td>`+statuBadge+`</td>
+                        </tr>
+                    `;
+                }
+
+                html += `
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button id="acc-header-`+miGroup[0].listId+`" class="acc-header btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne-`+miGroup[0].listId+`" aria-expanded="false" aria-controls="collapseOne-`+miGroup[0].listId+`">
+                                    <span class="list-title float-left">`+miGroup[0].listTitle+`</span> <span id="fetch-status-`+miGroup[0].listId+`" class="badge badge-info fetch-status float-right">`+miGroup[0].listId+`</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne-`+miGroup[0].listId+`" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                <table id="mi-table-`+miGroup[0].listId+`" class="table table-striped">
+                                    <thead>
+                                        <th>Maturity Indicator ID</th>
+                                        <th>Maturity Indicator Title</th>
+                                        <th>Comment</th>
+                                        <th>Status</th>
+                                    </thead>
+                                    <tbody>
+                                        `+miRowsHtml+`
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } // if key == "abstract"
         });
 
         var doItAgain = `
             <div class="row">
-                  <div class="col-lg-12 col-md-12 col-sm-12 p-0">
+                  <div class="col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-12 p-0">
                     <button onclick="window.location.href='https://nsdra.org'" type="button" class="btn btn-danger wrn-btn">Do it again</button>
                   </div>
             </div>

@@ -5,7 +5,7 @@ services:
     image: mysql:8.0.26
     container_name: nsdra-db
     volumes:
-      - d:/nsdra-db:/var/lib/mysql
+      - /data/nsdra-db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
     networks:
